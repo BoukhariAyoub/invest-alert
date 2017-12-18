@@ -39,17 +39,15 @@ var search = new leboncoin.Search()
     });
 
     router.get('/search', function(req, res) {
-        try {
-          search.run().then(function (data) {
-            console.log(data.page); // the current page
-            console.log(data.nbResult); // the number of results for this search
-            console.log(data.results); // the array of results
-            res.status(200).json(data);
-            });
-        } catch (e) {
-          handleError(res, e.message, "Failed to search.");
-          res.status(500);
-        }
+        search.run().then(function (data) {
+        console.log(data.page); // the current page
+        console.log(data.nbResult); // the number of results for this search
+        console.log(data.results); // the array of results
+        res.status(200).json(data);
+
+  }, function (err) {
+    handleError(res, err.message, "Failed to search.");
+  });
     });
     // more routes for our API will happen here
 
