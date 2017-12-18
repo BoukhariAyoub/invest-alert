@@ -22,6 +22,13 @@ var search = new leboncoin.Search()
   //  .addSearchExtra("mre", 1250); // min rent
 
 
+
+  // Generic error handler used by all endpoints.
+  function handleError(res, reason, message, code) {
+    console.log("ERROR: " + reason);
+    res.status(code || 500).json({"error": message});
+  }
+
     // ROUTES FOR OUR API
     // =============================================================================
     var router = express.Router();              // get an instance of the express Router
@@ -32,11 +39,16 @@ var search = new leboncoin.Search()
     });
 
     router.get('/search', function(req, res) {
-      search.run().then(function (data) {
-        console.log(data.page); // the current page
-        console.log(data.nbResult); // the number of results for this search
-        console.log(data.results); // the array of results
-        res.status(200).json(data);
+        try {
+          search.run().then(function (data) {
+            console.log(data.page); // the current page
+            console.log(data.nbResult); // the number of results for this search
+            console.log(data.results); // the array of results
+            res.status(200).json(data);
+        } catch (e) {
+          handleError(res, e.message, "Failed to search.");
+          res.status(500).json({"message":"\"Fail : "+e.message"\""})
+        }
       });
     });
     // more routes for our API will happen here
