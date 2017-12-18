@@ -45,11 +45,11 @@ var search = new leboncoin.Search()
             console.log(data.nbResult); // the number of results for this search
             console.log(data.results); // the array of results
             res.status(200).json(data);
+            });
         } catch (e) {
           handleError(res, e.message, "Failed to search.");
           res.status(500).json({"message":"\"Fail : "+e.message"\""})
         }
-      });
     });
     // more routes for our API will happen here
 
