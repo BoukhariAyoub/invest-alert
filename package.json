@@ -1,0 +1,17 @@
+{
+  "name": "invest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "leboncoin-api": "0.0.15",
+    "mongodb": "^3.0.0-rc0"
+  }
+}
