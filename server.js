@@ -14,12 +14,12 @@ var port = process.env.PORT || 8080;        // set our port
 
 var search = new leboncoin.Search()
     .setPage(1)
-    .setQuery("renove");
+    .setQuery("renove")
     //.setFilter(leboncoin.FILTERS.PARTICULIER)
-    //.setCategory("locations")
-  //  .setRegion("ilgit se_de_france")
-  //  .addSearchExtra("mrs", 250) // min rent
-  //  .addSearchExtra("mre", 1250); // min rent
+    .setCategory("locations")
+    .setRegion("ile_de_france")
+    .addSearchExtra("mrs", 250) // min rent
+    .addSearchExtra("mre", 1250); // min rent
 
 
 
