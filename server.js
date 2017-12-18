@@ -1,6 +1,5 @@
 // call the packages we need
 const express        = require('express');
-const MongoClient    = require('mongodb').MongoClient;
 const bodyParser     = require('body-parser');
 const app            = express();
 const leboncoin = require('leboncoin-api');
@@ -15,11 +14,11 @@ var port = process.env.PORT || 8080;        // set our port
 var search = new leboncoin.Search()
     .setPage(1)
     .setQuery("renove")
-    //.setFilter(leboncoin.FILTERS.PARTICULIER)
+    .setFilter(leboncoin.FILTERS.PARTICULIER)
     .setCategory("locations")
     .setRegion("ile_de_france")
-    .addSearchExtra("mrs", 250) // min rent
-    .addSearchExtra("mre", 1250); // min rent
+    .addSearchExtra("mrs", 1000) // min rent
+    .addSearchExtra("mre", 1100); // min rent
 
 
 
@@ -40,11 +39,8 @@ var search = new leboncoin.Search()
 
     router.get('/search', function(req, res) {
         search.run().then(function (data) {
-        console.log(data.page); // the current page
-        console.log(data.nbResult); // the number of results for this search
-        console.log(data.results); // the array of results
-        res.status(200).json(data);
-
+          console.log("found");
+        //res.status(200).json(data);
   }, function (err) {
     handleError(res, err.message, "Failed to search.");
   });
