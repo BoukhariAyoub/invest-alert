@@ -21,6 +21,7 @@ var search = new leboncoin.Search()
     .addSearchExtra("mre", 1100); // min rent
 
 
+    var scrap = require('scrap');
 
   // Generic error handler used by all endpoints.
   function handleError(res, reason, message, code) {
@@ -46,6 +47,15 @@ var search = new leboncoin.Search()
   });
     });
     // more routes for our API will happen here
+
+
+    router.get('/scrap', function(req, res) {
+      scrap('http://google.com', function(err, $) {
+        console.log($('title').text().trim()); //Google
+        res.status(200).json($('title').text().trim());
+      });
+
+        })
 
     // REGISTER OUR ROUTES -------------------------------
     // all of our routes will be prefixed with /api
